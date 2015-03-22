@@ -1,2 +1,2 @@
 # local
-export PATH=~/.bin:~/.sbin:$PATH
+export PATH=~/.bin:~/.sbin:/usr/local/bin:$PATH
