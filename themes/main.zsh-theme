@@ -1,12 +1,12 @@
 __show_term_marks(){
-	mark=" "
+	mark=""
 	#screen)
 	if [[ $TERM = 'screen' ]] then
-		mark=" screen >$mark"
+		mark="%{$BG[178]%} screen $mark"
 	fi
 	#ssh)
 	if [[ -n $SSH_CLIENT || -n $REMOTEHOST ]] then
-		mark=" ssh >$mark"
+		mark="%{$BG[178]%} ssh $mark"
 	fi
 	echo $mark
 }
@@ -18,7 +18,7 @@ __git_ps1_prompt(){
 }
 
 export LSCOLORS="exHecxdxbxegedabaggxgx"
-PROMPT='%{$reset_color%}%{$BG[038]%}%{$FG[015]%}$(__show_term_marks)$(date +%H:%M) %{$BG[243]%}%{$FG[015]%} %n@%m %{$BG[240]%}%{$FG[015]%} %~ %{$BG[237]%}$(__git_ps1_prompt)%{$reset_color%}
+PROMPT='%{$reset_color%}%{$FG[015]%}$(__show_term_marks)%{$BG[038]%} $(date +%H:%M) %{$BG[243]%}%{$FG[015]%} %n@%m %{$BG[240]%}%{$FG[015]%} %~ %{$BG[237]%}$(__git_ps1_prompt)%{$reset_color%}
 %{$FG[038]%}>>%{$reset_color%} '
 
 precmd() { print "" }
