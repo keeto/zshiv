@@ -1,12 +1,12 @@
 __show_term_marks(){
-	mark=""
+	mark=" "
 	#screen)
 	if [[ $TERM = 'screen' ]] then
-		mark="[screen]$mark"
+		mark=" screen >$mark"
 	fi
 	#ssh)
 	if [[ -n $SSH_CLIENT || -n $REMOTEHOST ]] then
-		mark="[ssh]$mark"
+		mark=" ssh >$mark"
 	fi
 	echo $mark
 }
@@ -18,11 +18,13 @@ __git_ps1_prompt(){
 }
 
 export LSCOLORS="exHecxdxbxegedabaggxgx"
-PROMPT='
-%{$reset_color%}[$(date +%H.%M)]%{$fg[yellow]%}$(__show_term_marks) %{$fg[green]%}%n@%m:%{$fg[blue]%}%{${PWD#$HOME/~}%}%{$reset_color%} $(__git_ps1_prompt)
-%# '
+PROMPT='%{$reset_color%}%{$BG[038]%}%{$FG[015]%}$(__show_term_marks)$(date +%H:%M) %{$BG[243]%}%{$FG[015]%} %n@%m %{$BG[240]%}%{$FG[015]%} %~ %{$BG[237]%}$(__git_ps1_prompt)%{$reset_color%}
+%{$FG[038]%}>>%{$reset_color%} '
 
-ZSH_THEME_GIT_PROMPT_PREFIX="<%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}> %{$fg[red]%}!dirty%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}>"
+precmd() { print "" }
+
+
+ZSH_THEME_GIT_PROMPT_PREFIX=" ("
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_DIRTY=") %{$BG[196]%} dirty %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=") "
