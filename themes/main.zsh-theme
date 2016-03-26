@@ -2,11 +2,11 @@ __show_term_marks(){
 	mark=""
 	#screen)
 	if [[ $TERM = 'screen' ]] then
-		mark="%{$BG[178]%} screen $mark"
+		mark="%{$BG[178]%}%{$FG[000]%} screen $mark"
 	fi
 	#ssh)
 	if [[ -n $SSH_CLIENT || -n $REMOTEHOST ]] then
-		mark="%{$BG[178]%} ssh $mark"
+		mark="%{$BG[178]%}%{$FG[000]%} ssh $mark"
 	fi
 	echo $mark
 }
